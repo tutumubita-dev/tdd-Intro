@@ -1,3 +1,10 @@
+function safeGuard(x, name = "value") {
+  if (typeof x !== "number" || !Number.isFinite(x)) {
+    return null;
+  }
+  return x;
+}
+
 /**
  * @param {number} num1 - First number to add.
  * @param {number} num2 - Second number to add.
@@ -12,7 +19,11 @@
  * sumDouble(5, 5); // 20
  */
 export function sumDouble(num1, num2) {
-  /* TODO */
+  let sumtotal = num1 + num2;
+  safeGuard(num1);
+  safeGuard(num2);
+
+  return num1 === num2 ? sumtotal * 2 : sumtotal;
 }
 
 /**
@@ -28,7 +39,9 @@ export function sumDouble(num1, num2) {
  * makes10(4, 4); // false
  */
 export function makes10(num1, num2) {
-  /* TODO */
+  safeGuard(num1);
+  safeGuard(num2);
+  return num1 + num2 === 10 || num1 === 10 || num2 === 10 ? true : false;
 }
 
 /**
@@ -46,7 +59,9 @@ export function makes10(num1, num2) {
  * near100(105, 10); // true
  */
 export function near100(n, distance) {
-  /* TODO */
+  safeGuard(n);
+  safeGuard(distance);
+  return Math.abs(100 - n) <= distance ? true : false;
 }
 
 /**
@@ -63,7 +78,8 @@ export function near100(n, distance) {
  * isMultiple35(7); // false
  */
 export function isMultiple35(n) {
-  /* TODO */
+  safeGuard(n);
+  return n % 5 === 0 || n % 3 === 0 ? true : false;
 }
 
 /**
@@ -81,7 +97,12 @@ export function isMultiple35(n) {
  * shareLastDigit(10, 21); // false
  */
 export function shareLastDigit(num1, num2) {
-  /* TODO */
+  safeGuard(num1);
+  safeGuard(num2);
+  if (num1 < 0 || num2 < 0) {
+    return null;
+  }
+  return num1 % 10 === num2 % 10 ? true : false;
 }
 
 /**
@@ -98,7 +119,9 @@ export function shareLastDigit(num1, num2) {
  * isColdAndHot(10, 50); // false
  */
 export function isColdAndHot(temp1, temp2) {
-  /* TODO */
+  safeGuard(temp1);
+  safeGuard(temp2);
+  return (temp1 > 100 && temp2 < 0) || (temp1 < 0 && temp2 > 100);
 }
 
 /**
@@ -114,7 +137,10 @@ export function isColdAndHot(temp1, temp2) {
  * makeABBA("a", "b"); // "abba"
  */
 export function makeABBA(A, B) {
-  /* TODO */
+  if (typeof A !== "string" && typeof B !== "string") {
+    return null;
+  }
+  return A + B + B + A;
 }
 
 /**
@@ -135,7 +161,10 @@ export function makeABBA(A, B) {
  * makeSLS("a", "abc"); // "aabca"
  */
 export function makeSLS(str1, str2) {
-  /* TODO */
+  if (typeof str1 !== "string" && typeof str2 !== "string") {
+    return null;
+  }
+  return str1.length > str2.length ? str2 + str1 + str2 : str1 + str2 + str1;
 }
 
 /**
@@ -156,7 +185,12 @@ export function makeSLS(str1, str2) {
  * canEnterClub(5, 5); // 1
  */
 export function canEnterClub(you, date) {
-  /* TODO */
+  safeGuard(you);
+  safeGuard(date);
+  if (you <= 2 || date <= 2) {
+    return 0;
+  }
+  return you >= 8 || date >= 8 ? 2 : 1;
 }
 
 /**
@@ -177,5 +211,21 @@ export function canEnterClub(you, date) {
  * shouldAnswerPhone(true, true, false); // true
  */
 export function shouldAnswerPhone(isMorning, isBoss, isAsleep) {
-  /* TODO */
+  if (
+    typeof isMorning !== "boolean" ||
+    typeof isBoss !== "boolean" ||
+    typeof isAsleep !== "boolean"
+  ) {
+    return null;
+  }
+
+  if (isAsleep === true) {
+    return false;
+  }
+
+  if (isMorning) {
+    return isBoss;
+  }
+
+  return true;
 }
